@@ -1,13 +1,12 @@
 package com.example.demo.modelo;
 
-import org.bson.BsonDateTime;
 
 public class Consumo {
 
-    private BsonDateTime fecha;
+    private String fecha;
     private Servicio servicio;
 
-    public Consumo(BsonDateTime fecha, Servicio servicio) {
+    public Consumo(String fecha, Servicio servicio) {
         super();
         this.fecha = fecha;
         this.servicio = servicio;
@@ -17,11 +16,11 @@ public class Consumo {
         super();
     }
 
-    public BsonDateTime getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(BsonDateTime fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

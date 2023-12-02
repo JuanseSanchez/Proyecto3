@@ -2,17 +2,17 @@ package com.example.demo.modelo;
 
 import java.util.List;
 
-import org.bson.BsonDateTime;
+import org.bson.types.ObjectId;
 
 public class Cliente {
 
-    private int id;
+    private ObjectId id;
     private String nombre;
-    private BsonDateTime entrada;
-    private BsonDateTime salida;
+    private String entrada;
+    private String salida;
     private List<Consumo> consumo;
 
-    public Cliente(String nombre, BsonDateTime entrada, BsonDateTime salida, List<Consumo> consumo) {
+    public Cliente(String nombre, String entrada, String salida, List<Consumo> consumo) {
         super();
         this.nombre = nombre;
         this.entrada = entrada;
@@ -24,11 +24,11 @@ public class Cliente {
         super();
     }
 
-    public int getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -40,19 +40,19 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public BsonDateTime getEntrada() {
+    public String getEntrada() {
         return entrada;
     }
 
-    public void setEntrada(BsonDateTime entrada) {
+    public void setEntrada(String entrada) {
         this.entrada = entrada;
     }
 
-    public BsonDateTime getSalida() {
+    public String getSalida() {
         return salida;
     }
 
-    public void setSalida(BsonDateTime salida) {
+    public void setSalida(String salida) {
         this.salida = salida;
     }
     

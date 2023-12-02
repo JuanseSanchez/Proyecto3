@@ -1,7 +1,6 @@
 package com.example.demo.modelo;
 
-import org.bson.BsonDateTime;
-
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import org.springframework.data.annotation.Id;
@@ -10,46 +9,45 @@ import org.springframework.data.annotation.Id;
 public class Reserva {
     //_id
     @Id
-    private String id;
+    private ObjectId id;
 
-    private BsonDateTime fechaInicio;
-    private BsonDateTime fechaFin;
+    private String inicio;
+    private String fin;
     private Habitacion habitacion;
 
-    public Reserva(BsonDateTime fechaInicio, BsonDateTime fechaFin, Habitacion habitacion) {
+    public Reserva(String inicio, String fin, Habitacion habitacion) {
         super();
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.inicio = inicio;
+        this.fin = fin;
         this.habitacion = habitacion;
-        
     }
 
     public Reserva() {
         super();
     }
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
-    public BsonDateTime getFechaInicio() {
-        return fechaInicio;
+    public String getinicio() {
+        return inicio;
     }
 
-    public void setFechaInicio(BsonDateTime fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setinicio(String inicio) {
+        this.inicio = inicio;
     }
 
-    public BsonDateTime getFechaFin() {
-        return fechaFin;
+    public String getfin() {
+        return fin;
     }
 
-    public void setFechaFin(BsonDateTime fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setfin(String fin) {
+        this.fin = fin;
     }
 
     public Habitacion getHabitacion() {
@@ -60,7 +58,4 @@ public class Reserva {
         this.habitacion = habitacion;
     }
 
-    
-    
-    
 }
