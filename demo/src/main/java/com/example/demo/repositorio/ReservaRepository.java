@@ -7,14 +7,7 @@ import com.example.demo.modelo.Reserva;
 
 import java.util.List;
 
-public interface ReservaRepository extends MongoRepository<Reserva, Integer> {
-
-    //Create
-    Reserva save(Reserva reserva);
-
-    //Read
-    @Query("{_id : ?0}")
-    Reserva findById(int id);
+public interface ReservaRepository extends MongoRepository<Reserva, String> {
 
     @Query("{}")
     List<Reserva> findAllReservas();

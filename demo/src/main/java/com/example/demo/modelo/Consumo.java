@@ -1,7 +1,5 @@
 package com.example.demo.modelo;
 
-import java.time.LocalDate;
-
 import org.bson.BsonDateTime;
 
 public class Consumo {

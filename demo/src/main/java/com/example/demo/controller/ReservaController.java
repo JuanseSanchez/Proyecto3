@@ -2,10 +2,9 @@ package com.example.demo.controller;
 
 import org.springframework.ui.Model;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.modelo.Habitacion;
 import com.example.demo.modelo.Reserva;
 import com.example.demo.repositorio.ReservaRepository;
 
@@ -26,33 +26,20 @@ public class ReservaController {
     private ReservaRepository reservasRepository;
 
     @GetMapping("/reservas")
-    public String reservas(Model model) {
-        model.addAttribute("reservas", new Reserva());
+    public String obtenerTodasLasReservas(Model model) {
+        model.addAttribute("reservas", reservasRepository.findAllReservas());
         return "reservas";
+    } 
+
+    @GetMapping("/habitaciones")
+    public String obtenerTodasLasHabitaciones(Model model) {
+        List<Reserva> reservas = reservasRepository.findAllReservas();
+        
+        return "habitaciones";
     }
 
 
-/* 
-    @GetMapping("/reservas/new")
-    public String reservasForm(Model model) {
-        model.addAttribute("habitaciones", habitacionRepository.findAllHabitaciones());
-        return "reservasNuevo";
-    }
-    
-    @PostMapping("/reservas/new/save")
-    public String reservasGuardar(@ModelAttribute("fechaInicio") String fechaInicio,
-            @ModelAttribute("fechaFin") String fechaFin,
-            @RequestParam(value = "hab", required = true) String numHabitacion) {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate fechaI = LocalDate.parse(fechaInicio, formatter);
-        LocalDate fechaF = LocalDate.parse(fechaFin, formatter);
-        Habitacion objectId = new ObjectId(numHabitacion);
-        reservasRepository.save(new Reserva(fechaI, fechaF, objectId));
-        return "redirect:/reservas";
-    }
-*/
-        @GetMapping("/reservas/{id}/delete")
+    @GetMapping("/reservas/{id}/delete")
     public String reservasEliminar(@PathVariable("id") String id) {
 
         reservasRepository.deleteById(id);
