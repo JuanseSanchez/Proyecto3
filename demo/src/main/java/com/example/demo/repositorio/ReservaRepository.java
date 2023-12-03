@@ -31,6 +31,7 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
 
     @Aggregation(pipeline = {
         "{ $group: { _id: \"$habitacion.numero\", habitacion: { $first: \"$habitacion\" } } }",
-        "{ $replaceWith: \"$habitacion\" }"})
+        "{ $replaceWith: \"$habitacion\" }",
+        "{ $sort: { \"numero\": 1 } }"})
     List<Habitacion> getUniqueHabitaciones();
 }
