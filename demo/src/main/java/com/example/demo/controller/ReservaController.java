@@ -45,22 +45,28 @@ public class ReservaController {
         return "consumos";
     }
 
-    @GetMapping("/clientes/requerimiento7")
+    @GetMapping("/RFC7")
     public String obtenerClientesRequerimiento7(Model model) {
-        model.addAttribute("clientes", reservasRepository.getReq7());
-        return "clientes";
+        model.addAttribute("RFC7", reservasRepository.getReq7());
+        return "RFC7";
     } 
 
-    @GetMapping("/habitaciones/requerimiento2")
+    @GetMapping("/RFC3")
+    public String RFC3(Model model) {
+        model.addAttribute("RFC3", reservasRepository.getReq7());
+        return "RFC3";
+    } 
+
+    @GetMapping("/RFC2")
     public String obtenerPorcentajeOcupacion(Model model) {
-        model.addAttribute("habitaciones", reservasRepository.getReq2());
-        return "habitaciones";
+        model.addAttribute("RFC2", reservasRepository.getReq2());
+        return "RFC2";
     }
 
-    @GetMapping("/habitaciones/requerimiento1")
+    @GetMapping("/RFC1")
     public String obtenerConsumoTotal(Model model) {
-        model.addAttribute("habitaciones", reservasRepository.getReq1());
-        return "habitaciones";
+        model.addAttribute("RFC1", reservasRepository.getReq1());
+        return "RFC1";
     }
 
     @GetMapping("/salidas")

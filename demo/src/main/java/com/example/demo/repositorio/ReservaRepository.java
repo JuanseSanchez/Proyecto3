@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import com.example.demo.modelo.Cliente;
 import com.example.demo.modelo.Habitacion;
+import com.example.demo.modelo.RFC1;
 import com.example.demo.modelo.Reserva;
 import com.example.demo.modelo.EntradaSalida;
 import com.example.demo.modelo.Servicio;
@@ -69,8 +70,11 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
     @Aggregation(pipeline = {
         "{ $unwind: \"$habitacion.clientes\" }",
         "{ $unwind: \"$habitacion.clientes.consumos\" }",
-        "{ $group: { _id: \"$habitacion.numero\", totalConsumption: { $sum: \"$habitacion.clientes.consumos.precio\" } } }"})
-    List<Cliente> getReq1();
+        "{ $match: { \"habitacion.clientes.consumos.fecha\": { $gte: { $toDate: \"2023-01-01T00:00:00Z\" }, $lt: { $toDate: \"2023-04-01T00:00:00Z\" } } } }",
+        "{ $group: { _id: \"$habitacion.numero\", totalConsumption: { $sum: \"$habitacion.clientes.consumos.precio\" } } }",
+        "{$project: {_id: 0,hotel: \"$_id.hotel\", numero: \"$_id.habitacion\",totalConsumption:1}}"})
+
+    List<RFC1> getReq1();
 
     @Aggregation(pipeline = {
         "{ $unwind: \"$habitacion.clientes\" }",
@@ -81,7 +85,7 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
 
     @Aggregation(pipeline = {
         "{ $unwind: \"$habitacion.clientes\" }",
-        "{ $group: { _id: \"$habitacion.clientes.entrada\", clientes: { $push: { _id: \"$habitacion.clientes.id\", nombre: \"$habitacion.clientes.nombre\" } } } }",
+        "{ $group: { _id: hotel: \"$habitacion.hotel\", habitacion: \"$habitacion.clientes.entrada\", clientes: { $push: { _id: \"$habitacion.clientes.id\", nombre: \"$habitacion.clientes.nombre\" } } } }",
         "{ $project: { fecha: \"$_id\", clientes: 1, _id: 0 } }",
         "{ $sort: { \"fecha\": 1 } }"})
     List<EntradaSalida> getEntradas();

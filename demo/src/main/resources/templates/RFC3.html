@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFC1</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
+</head>
+<body>
+
+    <!-- Incluye el navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+<div class="container mt-3">
+    <h1>RFC1</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Hotel</th>
+                <th>Numero</th>
+                <th>Consumos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ele : ${RFC3}">
+                <td th:text="${ele.hotel}"></td>
+                <td th:text="${ele.numero}"></td>
+                <td th:text="${ele.totalConsumption}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+</body>
+</html>
