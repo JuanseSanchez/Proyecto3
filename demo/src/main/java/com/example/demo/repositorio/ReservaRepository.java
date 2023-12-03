@@ -9,6 +9,7 @@ import com.example.demo.modelo.Cliente;
 import com.example.demo.modelo.Habitacion;
 import com.example.demo.modelo.RFC1;
 import com.example.demo.modelo.RFC2;
+import com.example.demo.modelo.RFC7;
 import com.example.demo.modelo.Reserva;
 import com.example.demo.modelo.EntradaSalida;
 import com.example.demo.modelo.Servicio;
@@ -62,13 +63,13 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
     List<RFC1> getReq1();
 
     @Aggregation(pipeline = {
-        "{ $unwind: \"$habitacion.clientes\" }",
-        "{ $group: { _id: \"$habitacion.clientes.id\", nombre: { $first: \"$habitacion.clientes.nombre\" }, _fechas: { $push: \"$habitacion.clientes.entrada\" }, _salidas: { $push: \"$habitacion.clientes.salida\" } } }",
-        "{ $project: { nombre: \"$nombre\", buencliente: [ { $anyElementTrue: { $map: { input: \"$_fechas\", in: { $cond: { if: { $and: [ { $gte: [ \"$$this\", \"2023-01-01T00:00:00Z\" ] }, { $lt: [ \"$$this\", \"2023-04-01T00:00:00Z\" ] } ] }, then: 1, else: 0 } } } } } }, { $anyElementTrue: { $map: { input: \"$_fechas\", in: { $cond: { if: { $and: [ { $gte: [ \"$$this\", \"2023-04-01T00:00:00Z\" ] }, { $lt: [ \"$$this\", \"2023-07-01T00:00:00Z\" ] } ] }, then: 1, else: 0 } } } } } }, { $anyElementTrue: { $map: { input: \"$_fechas\", in: { $cond: { if: { $and: [ { $gte: [ \"$$this\", \"2023-07-01T00:00:00Z\" ] }, { $lt: [ \"$$this\", \"2023-10-01T00:00:00Z\" ] } ] }, then: 1, else: 0 } } } } } }, { $anyElementTrue: { $map: { input: \"$_fechas\", in: { $cond: { if: { $and: [ { $gte: [ \"$$this\", \"2023-10-01T00:00:00Z\" ] }, { $lte: [ \"$$this\", \"2023-12-31T00:00:00Z\" ] } ] }, then: 1, else: 0 } } } } } ] } }",
-        "{ $project: { nombre: 1, atLeastThreeTrue: { $gte: [ { $size: { $filter: { input: \"$buencliente\", as: \"bool\", cond: { $eq: [ \"$$bool\", true ] } } } }, 3 ] } } }",
-        "{ $match: { atLeastThreeTrue: true } }",
-        "{ $project: { id: 1, nombre: 1 } }"})
-    List<Cliente> getReq7();
+        "{ $unwind: { path: \"$habitacion.clientes\", includeArrayIndex: \"string\", preserveNullAndEmptyArrays: true } }",
+        "{ $group: { _id: \"$habitacion.clientes.id\", _nombre: { $first: \"$habitacion.clientes.nombre\" }, _fechas: { $push: \"$habitacion.clientes.entrada\" }, _salidas: { $push: \"$habitacion.clientes.salida\" } } }",
+        "{ $project: { _nombre: \"$_nombre\", buencliente: [ { $anyElementTrue: { $map: { input: \"$_fechas\", in: { $cond: { if: { $and: [ { $gte: [\"$$this\", \"2023-01-01T00:00:00Z\"] }, { $lt: [\"$$this\", \"2023-04-01T00:00:00Z\"] } ] }, then: 1, else: 0 } } } } }, { $anyElementTrue: { $map: { input: \"$_fechas\", in: { $cond: { if: { $and: [ { $gte: [\"$$this\", \"2023-04-01T00:00:00Z\"] }, { $lt: [\"$$this\", \"2023-07-01T00:00:00Z\"] } ] }, then: 1, else: 0 } } } } }, { $anyElementTrue: { $map: { input: \"$_fechas\", in: { $cond: { if: { $and: [ { $gte: [\"$$this\", \"2023-07-01T00:00:00Z\"] }, { $lt: [\"$$this\", \"2023-10-01T00:00:00Z\"] } ] }, then: 1, else: 0 } } } } }, { $anyElementTrue: { $map: { input: \"$_fechas\", in: { $cond: { if: { $and: [ { $gte: [\"$$this\", \"2023-10-01T00:00:00Z\"] }, { $lte: [\"$$this\", \"2023-12-31T00:00:00Z\"] } ] }, then: 1, else: 0 } } } } } ] } }",
+        "{ $project: { _nombre: 1, allTrue: { $gte: [ { $size: { $filter: { input: \"$buencliente\", as: \"bool\", cond: { $eq: [\"$$bool\", true] } } } }, 4 ] } } }",
+        "{ $match: { allTrue: true } }",
+        "{ $project: { _id: 1, nombre: \"$_nombre\" } }"})
+    List<RFC7> getReq7();
 
     @Aggregation(pipeline = {
         "{ $match: { \"habitacion.clientes.id\": ?0 } }",

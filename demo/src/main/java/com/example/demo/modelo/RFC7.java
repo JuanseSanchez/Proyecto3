@@ -2,44 +2,31 @@ package com.example.demo.modelo;
 
 public class RFC7 {
 
-    private String hotel;
-    private int numero;
-    private int totalConsumption;
+    private int id;
+    private String nombre;
 
-    public RFC7(String hotel, int numero, int totalConsumption) {
-        super();
-        this.hotel = hotel;
-        this.numero = numero;
-        this.totalConsumption = totalConsumption;
-    }
+    public RFC7(int id, String nombre) {
+		this.id = id;
+		this.nombre = nombre;
+	}
 
-    public RFC7() {
+	public RFC7() {
         super();
     }
 
-	public String getHotel() {
-		return hotel;
+	public int getId() {
+		return id;
 	}
 
-	public void setHotel(String hotel) {
-		this.hotel = hotel;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getNumero() {
-		return numero;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-
-	public int getTotalConsumption() {
-		return totalConsumption;
-	}
-
-	public void setTotalConsumption(int totalConsumption) {
-		this.totalConsumption = totalConsumption;
-	}
-
-	
 }

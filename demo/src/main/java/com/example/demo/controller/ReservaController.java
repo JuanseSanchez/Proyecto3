@@ -51,13 +51,13 @@ public class ReservaController {
     public String obtenerClientesRequerimiento7(Model model) {
         model.addAttribute("RFC7", reservasRepository.getReq7());
         return "RFC7";
-    } 
+    }
 
     @GetMapping("/RFC3")
     public String RFC3(Model model, int id, Date fechaInicio, Date fechaFin) {
         model.addAttribute("RFC3", reservasRepository.getReq3(id, fechaInicio, fechaFin));
         return "RFC3";
-    } 
+    }
 
     @GetMapping("/RFC2")
     public String obtenerPorcentajeOcupacion(Model model) {
@@ -89,7 +89,7 @@ public class ReservaController {
         reservasRepository.deleteById(id);
         return "redirect:/reservas";
     }
-/* 
+/*
     @GetMapping("/reservas/{id}/edit")
     public String reservasEditar(@PathVariable("id") String id, Model model) {
         reservasRepository.deleteById(id);

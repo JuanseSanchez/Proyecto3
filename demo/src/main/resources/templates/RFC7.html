@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFC3</title>
+    <title>RFC7</title>
     <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
 </head>
 <body>
@@ -17,16 +17,14 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Hotel</th>
-                <th>Numero</th>
-                <th>Consumos</th>
+                <th>Id Cliente</th>
+                <th>Nombre</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="ele : ${RFC7}">
-                <td th:text="${ele.hotel}"></td>
-                <td th:text="${ele.numero}"></td>
-                <td th:text="${ele.totalConsumption}"></td>
+            <tr th:each="elem : ${RFC7}">
+                <td th:text="${elem.id}"></td>
+                <td th:text="${elem.nombre}"></td>
             </tr>
         </tbody>
     </table>
