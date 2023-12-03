@@ -1,7 +1,5 @@
 package com.example.demo.modelo;
 
-import java.util.List;
-
 public class RFC7 {
 
     private String hotel;

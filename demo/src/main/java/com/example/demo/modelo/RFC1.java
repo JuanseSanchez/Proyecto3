@@ -1,7 +1,5 @@
 package com.example.demo.modelo;
 
-import java.util.List;
-
 public class RFC1 {
 
     private String hotel;
@@ -42,6 +40,4 @@ public class RFC1 {
 	public void setTotalConsumption(int totalConsumption) {
 		this.totalConsumption = totalConsumption;
 	}
-
-	
 }

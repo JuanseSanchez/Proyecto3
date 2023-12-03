@@ -53,6 +53,12 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
         "{$group: {_id: \"$habitacion.clientes.id\",nombre: {$first: \"$habitacion.clientes.nombre\"},consumos: {$push: \"$habitacion.clientes.consumos\"}}}"})
     List<Cliente> getUniqueConsumos();
 
+    @Aggregation(pipeline = {"{ $unwind: \"$habitacion.clientes\" }", "{ $unwind: \"$habitacion.clientes.consumos\" }",
+        "{ $match: { $expr: { $and: [ { $gte: [ { $toDate: \"$habitacion.clientes.consumos.fecha\" }, { $subtract: [new Date(), {$multiply:[365, 24, 60, 60, 1000]}] } ] }, { $lte: [ { $toDate: \"$habitacion.clientes.consumos.fecha\" }, new Date() ] } ] } } }",
+        "{ $group: { _id: { hotel: \"$habitacion.hotel\", habitacion: \"$habitacion.numero\" }, totalConsumption: { $sum: \"$habitacion.clientes.consumos.precio\" } } }",
+        "{ $project: { _id: 0, hotel: \"$_id.hotel\", numero: \"$_id.habitacion\", totalConsumption: 1 } }"})
+    List<RFC1> getReq1();
+
     @Aggregation(pipeline = {
         "{ $unwind: \"$habitacion.clientes\" }",
         "{ $group: { _id: \"$habitacion.clientes.id\", nombre: { $first: \"$habitacion.clientes.nombre\" }, _fechas: { $push: \"$habitacion.clientes.entrada\" }, _salidas: { $push: \"$habitacion.clientes.salida\" } } }",
@@ -66,15 +72,6 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
         "{ $group: { _id: \"$habitacion.numero\", totalDays: { $sum: { $dateDiff: { startDate: { $toDate: \"$inicio\" }, endDate: { $toDate: \"$fin\" }, unit: \"day\" } } } } }",
         "{ $project: { _id: 1, porcentajeOcupacion: { $multiply: [ { $divide: [ \"$totalDays\", 365 ] }, 100 ] } } }"})
     List<Habitacion> getReq2();
-
-    @Aggregation(pipeline = {
-        "{ $unwind: \"$habitacion.clientes\" }",
-        "{ $unwind: \"$habitacion.clientes.consumos\" }",
-        "{ $match: { \"habitacion.clientes.consumos.fecha\": { $gte: { $toDate: \"2023-01-01T00:00:00Z\" }, $lt: { $toDate: \"2023-04-01T00:00:00Z\" } } } }",
-        "{ $group: { _id: \"$habitacion.numero\", totalConsumption: { $sum: \"$habitacion.clientes.consumos.precio\" } } }",
-        "{$project: {_id: 0,hotel: \"$_id.hotel\", numero: \"$_id.habitacion\",totalConsumption:1}}"})
-
-    List<RFC1> getReq1();
 
     @Aggregation(pipeline = {
         "{ $unwind: \"$habitacion.clientes\" }",
