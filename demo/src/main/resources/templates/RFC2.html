@@ -17,14 +17,16 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Numero habitacion</th>
-                <th>porcentaje Ocupacion</th>
+                <th>Hotel</th>
+                <th>Numero Habitación</th>
+                <th>Porcentaje de Ocupación</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="ele : ${RFC2}">
-                <td th:text="${ele.num}"></td>
-                <td th:text="${ele.porcentajeOcupacion}"></td>
+            <tr th:each="elem : ${RFC2}">
+                <td th:text="${elem.hotel}"></td>
+                <td th:text="${elem.numero}"></td>
+                <td th:text="${elem.porcentajeOcupacion}"></td>
             </tr>
         </tbody>
     </table>
