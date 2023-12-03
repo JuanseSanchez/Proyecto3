@@ -2,44 +2,33 @@ package com.example.demo.modelo;
 
 public class RFC2 {
 
-    private String hotel;
-    private int numero;
-    private int totalConsumption;
+    private int num;
+    private float porcentajeOcupacion;
 
-    public RFC2(String hotel, int numero, int totalConsumption) {
+    public RFC2(int num, float porcentajeOcupacion) {
         super();
-        this.hotel = hotel;
-        this.numero = numero;
-        this.totalConsumption = totalConsumption;
+        this.num = num;
+        this.porcentajeOcupacion = porcentajeOcupacion;
     }
 
     public RFC2() {
         super();
     }
 
-	public String getHotel() {
-		return hotel;
+	public int getNum() {
+		return num;
 	}
 
-	public void setHotel(String hotel) {
-		this.hotel = hotel;
+	public void setNum(int num) {
+		this.num = num;
 	}
 
-	public int getNumero() {
-		return numero;
+	public float getPorcentajeOcupacion() {
+		return porcentajeOcupacion;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setPorcentajeOcupacion(float porcentajeOcupacion) {
+		this.porcentajeOcupacion = porcentajeOcupacion;
 	}
 
-	public int getTotalConsumption() {
-		return totalConsumption;
-	}
-
-	public void setTotalConsumption(int totalConsumption) {
-		this.totalConsumption = totalConsumption;
-	}
-
-	
 }

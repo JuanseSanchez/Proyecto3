@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFC3 menu</title>
+</head>
+<body>
+
+<h2>RFC3 menu</h2>
+
+<form id="myForm">
+    <label for="field1">Id huesped:</label>
+    <input type="number" id="field1" name="field1" required><br>
+
+    <label for="field2">Fecha inicio:</label>
+    <input type="date" id="field2" name="field2" required><br>
+
+    <label for="field3">Fecha fin:</label>
+    <input type="date" id="field3" name="field3" required><br>
+
+    <button type="button" onclick="submitForm()">Submit</button>
+</form>
+
+<script>
+    function submitForm() {
+        // Get values from the form fields
+        var field1Value = document.getElementById('field1').value;
+        var field2Value = document.getElementById('field2').value;
+        var field3Value = document.getElementById('field3').value;
+
+        // You can perform additional validation or processing here
+
+        // Display the values (for demonstration purposes)
+        alert("Field 1: " + field1Value + "\nField 2: " + field2Value + "\nField 3: " + field3Value);
+    }
+</script>
+
+</body>
+</html>

@@ -13,6 +13,7 @@ import com.example.demo.modelo.EntradaSalida;
 import com.example.demo.modelo.Servicio;
 import com.example.demo.modelo.TipoHabitacion;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
@@ -69,9 +70,19 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
     List<Cliente> getReq7();
 
     @Aggregation(pipeline = {
-        "{ $group: { _id: \"$habitacion.numero\", totalDays: { $sum: { $dateDiff: { startDate: { $toDate: \"$inicio\" }, endDate: { $toDate: \"$fin\" }, unit: \"day\" } } } } }",
+        "{ $match: { \"habitacion.clientes.id\": ?0 } }",
+        "{ $unwind: \"$habitacion.clientes.consumos\" }",
+        "{ $match: { \"habitacion.clientes.consumos.fecha\": { $gte: ?1, $lt: ?2 } } }",
+        "{$group: {_id: \"$habitacion.clientes.id\",nombreC: { $first: \"$habitacion.clientes.nombre\" },totalConsumos: { $sum: \"$habitacion.clientes.consumos.precio\" }}}",
+        "{ $project: { _id: 0, clienteId: \"$_id\", clienteNombre: \"$nombreC\", totalConsumos: 1} }"
+    })
+    List<Habitacion> getReq3(int clienteId, Date startDate, Date endDate);
+
+    @Aggregation(pipeline = {
+        "{ $group: { _id: \"$habitacion.numero\", totalDays: { $sum: { $dateDiff: { startDate: { $toDate: \"$inicio\" }, endDate: { $toDate: \"$fin\" }, unit: \"day\" } } } }",
         "{ $project: { _id: 1, porcentajeOcupacion: { $multiply: [ { $divide: [ \"$totalDays\", 365 ] }, 100 ] } } }"})
     List<Habitacion> getReq2();
+
 
     @Aggregation(pipeline = {
         "{ $unwind: \"$habitacion.clientes\" }",

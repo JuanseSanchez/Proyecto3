@@ -2,44 +2,43 @@ package com.example.demo.modelo;
 
 public class RFC3 {
 
-    private String hotel;
-    private int numero;
-    private int totalConsumption;
+    private int totalConsumos;
+    private int clienteId;
+	private String clienteNombre;
 
-    public RFC3(String hotel, int numero, int totalConsumption) {
+    public RFC3(String clienteNombre, int totalConsumos, int clienteId) {
         super();
-        this.hotel = hotel;
-        this.numero = numero;
-        this.totalConsumption = totalConsumption;
+        this.clienteNombre = clienteNombre;
+        this.totalConsumos = totalConsumos;
+        this.clienteId = clienteId;
     }
 
     public RFC3() {
         super();
     }
 
-	public String getHotel() {
-		return hotel;
+	public int getTotalConsumos() {
+		return totalConsumos;
 	}
 
-	public void setHotel(String hotel) {
-		this.hotel = hotel;
+	public void setTotalConsumos(int totalConsumos) {
+		this.totalConsumos = totalConsumos;
 	}
 
-	public int getNumero() {
-		return numero;
+	public int getClienteId() {
+		return clienteId;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setClienteId(int clienteId) {
+		this.clienteId = clienteId;
 	}
 
-	public int getTotalConsumption() {
-		return totalConsumption;
+	public String getClienteNombre() {
+		return clienteNombre;
 	}
 
-	public void setTotalConsumption(int totalConsumption) {
-		this.totalConsumption = totalConsumption;
+	public void setClienteNombre(String clienteNombre) {
+		this.clienteNombre = clienteNombre;
 	}
 
-	
 }
