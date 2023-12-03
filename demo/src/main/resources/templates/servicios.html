@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habitaciones</title>
+    <title>Servicios</title>
     <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
 </head>
 <body>
@@ -12,23 +12,19 @@
     <div th:replace="navbar :: navbar"></div>
 
 <div class="container mt-3">
-    <h1>Habitaciones</h1>
+    <h1>Servicios</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Hotel</th>
-                <th>Número</th>
-                <th>Tipo</th>
+                <th>Servicio</th>
                 <th>Precio</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="habitacion : ${habitaciones}">
-                <td th:text="${habitacion.hotel}"></td>
-                <td th:text="${habitacion.numero}"></td>
-                <td th:text="${habitacion.tipo.nombre}"></td>
-                <td th:text="${habitacion.tipo.precio}"></td>
+            <tr th:each="servicio : ${servicios}">
+                <td th:text="${servicio.nombre}"></td>
+                <td th:text="${servicio.precio}"></td>
             </tr>
         </tbody>
     </table>

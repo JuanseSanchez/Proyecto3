@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import com.example.demo.modelo.Habitacion;
 import com.example.demo.modelo.Reserva;
+import com.example.demo.modelo.Servicio;
 import com.example.demo.modelo.TipoHabitacion;
 
 import java.util.List;
@@ -34,4 +35,12 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
         "{ $replaceWith: \"$habitacion\" }",
         "{ $sort: { \"numero\": 1 } }"})
     List<Habitacion> getUniqueHabitaciones();
+
+    @Aggregation(pipeline = {
+        "{ $unwind: \"$habitacion.clientes\" }",
+        "{ $unwind: \"$habitacion.clientes.consumos\" }",
+        "{$group: {_id: \"$habitacion.clientes.consumos.nombre\",precio: {$first: \"$habitacion.clientes.consumos.precio\"}}}",
+        "{$project: {_id: 0,nombre: \"$_id\",precio: 1}}",
+        "{ $sort: { \"nombre\": 1 } }"})
+    List<Servicio> getUniqueServicios();
 }

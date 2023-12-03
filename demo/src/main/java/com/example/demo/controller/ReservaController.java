@@ -43,6 +43,12 @@ public class ReservaController {
         return "tiposhabitaciones";
     }
 
+    @GetMapping("/servicios")
+    public String obtenerServicios(Model model) {
+        model.addAttribute("servicios", reservasRepository.getUniqueServicios());
+        return "servicios";
+    }
+
 
     @GetMapping("/reservas/{id}/delete")
     public String reservasEliminar(@PathVariable("id") String id) {
