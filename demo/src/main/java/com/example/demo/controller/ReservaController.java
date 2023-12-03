@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.repositorio.ReservaRepository;
 
@@ -54,8 +56,10 @@ public class ReservaController {
     } 
 
     @GetMapping("/RFC3")
-    public String RFC3(Model model, int id, Date fechaInicio, Date fechaFin) {
-        model.addAttribute("RFC3", reservasRepository.getReq3(id, fechaInicio, fechaFin));
+    public String RFC3(Model model, @RequestParam(name = "id") int id,
+                                    @RequestParam(name = "fechaI") Date fechaI,
+                                    @RequestParam(name = "fechaF") Date fechaF) {
+        model.addAttribute("RFC3", reservasRepository.getReq3(id, fechaI, fechaF));
         return "RFC3";
     } 
 
