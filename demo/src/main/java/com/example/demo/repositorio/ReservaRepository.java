@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import com.example.demo.modelo.Habitacion;
 import com.example.demo.modelo.Reserva;
-import com.example.demo.modelo.Salida;
+import com.example.demo.modelo.EntradaSalida;
 import com.example.demo.modelo.Servicio;
 import com.example.demo.modelo.TipoHabitacion;
 
@@ -48,6 +48,14 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
     @Aggregation(pipeline = {
         "{ $unwind: \"$habitacion.clientes\" }",
         "{ $group: { _id: \"$habitacion.clientes.salida\", clientes: { $push: { _id: \"$habitacion.clientes.id\", nombre: \"$habitacion.clientes.nombre\" } } } }",
-        "{ $project: { fecha: \"$_id\", clientes: 1, _id: 0 } }"})
-    List<Salida> getSalidas();
+        "{ $project: { fecha: \"$_id\", clientes: 1, _id: 0 } }",
+        "{ $sort: { \"fecha\": 1 } }"})
+    List<EntradaSalida> getSalidas();
+
+    @Aggregation(pipeline = {
+        "{ $unwind: \"$habitacion.clientes\" }",
+        "{ $group: { _id: \"$habitacion.clientes.entrada\", clientes: { $push: { _id: \"$habitacion.clientes.id\", nombre: \"$habitacion.clientes.nombre\" } } } }",
+        "{ $project: { fecha: \"$_id\", clientes: 1, _id: 0 } }",
+        "{ $sort: { \"fecha\": 1 } }"})
+    List<EntradaSalida> getEntradas();
 }

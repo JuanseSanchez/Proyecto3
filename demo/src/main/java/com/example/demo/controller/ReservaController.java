@@ -45,6 +45,12 @@ public class ReservaController {
         return "salidas";
     }
 
+    @GetMapping("/entradas")
+    public String obtenerEntrada(Model model) {
+        model.addAttribute("entradas", reservasRepository.getEntradas());
+        return "entradas";
+    }
+
     @GetMapping("/reservas/{id}/delete")
     public String reservasEliminar(@PathVariable("id") String id) {
 

@@ -2,17 +2,17 @@ package com.example.demo.modelo;
 
 import java.util.List;
 
-public class Salida {
+public class EntradaSalida {
 
     private String fecha;
     private List<Cliente> clientes;
 
-    public Salida(String fecha, List<Cliente> clientes) {
+    public EntradaSalida(String fecha, List<Cliente> clientes) {
 		this.fecha = fecha;
 		this.clientes = clientes;
 	}
 
-	public Salida() {
+	public EntradaSalida() {
         super();
     }
 
