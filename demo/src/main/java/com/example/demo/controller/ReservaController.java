@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,8 +54,8 @@ public class ReservaController {
     } 
 
     @GetMapping("/RFC3")
-    public String RFC3(Model model) {
-        model.addAttribute("RFC3", reservasRepository.getReq7());
+    public String RFC3(Model model, int id, Date fechaInicio, Date fechaFin) {
+        model.addAttribute("RFC3", reservasRepository.getReq3(id, fechaInicio, fechaFin));
         return "RFC3";
     } 
 
