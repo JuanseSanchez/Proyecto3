@@ -29,7 +29,9 @@
                 <td>
                     <ul th:if="${cliente.consumos != null}">
                         <li th:each="consumo : ${cliente.consumos}">
-                            <span th:text="${consumo.fecha}"></span>
+                            <span th:text="'Fecha del Consumo: ' + ${consumo.fecha}"></span><br/>
+                            <span style="margin-left: 5px;" th:text="'Servicio Consumido: ' + ${consumo.nombre}"></span><br/>
+                            <span style="margin-left: 5px;" th:text="'Costo del Consumo: ' + ${consumo.precio}"></span><br/>
                         </li>
                     </ul>
                 </td>

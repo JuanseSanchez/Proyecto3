@@ -57,7 +57,7 @@ public class ReservaController {
         return "habitaciones";
     }
 
-    @GetMapping("/habitaciones/requerimiento2")
+    @GetMapping("/habitaciones/requerimiento1")
     public String obtenerConsumoTotal(Model model) {
         model.addAttribute("habitaciones", reservasRepository.getReq1());
         return "habitaciones";
