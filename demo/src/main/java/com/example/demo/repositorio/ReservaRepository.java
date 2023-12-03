@@ -93,7 +93,7 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
 
     @Aggregation(pipeline = {
         "{ $unwind: \"$habitacion.clientes\" }",
-        "{ $group: { _id: hotel: \"$habitacion.hotel\", habitacion: \"$habitacion.clientes.entrada\", clientes: { $push: { _id: \"$habitacion.clientes.id\", nombre: \"$habitacion.clientes.nombre\" } } } }",
+        "{ $group: { _id: \"$habitacion.clientes.entrada\", clientes: { $push: { _id: \"$habitacion.clientes.id\", nombre: \"$habitacion.clientes.nombre\" } } } }",
         "{ $project: { fecha: \"$_id\", clientes: 1, _id: 0 } }",
         "{ $sort: { \"fecha\": 1 } }"})
     List<EntradaSalida> getEntradas();
