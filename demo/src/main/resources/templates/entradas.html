@@ -26,8 +26,10 @@
                 <td th:text="${entrada.fecha}"></td>
                 <td>
                     <li th:each="cliente : ${entrada.clientes}">
-                        <span th:text="'Id Cliente: ' + ${cliente.id}"></span><br/>
-                        <span style="margin-left: 20px;" th:text="'Nombre: ' + ${cliente.nombre}"></span><br/>
+                        <span><strong th:text="${'Id Cliente: '}"></strong></span>
+                        <span style="margin-left: 5px;" th:text="${cliente.id}"></span><br/>
+                        <span style="margin-left: 20px;"><strong th:text="${'Nombre: '}"></strong></span>
+                        <span style="margin-left: 5px;" th:text="${cliente.nombre}"></span><br/>
                     </li>
                 </td>
             </tr>
