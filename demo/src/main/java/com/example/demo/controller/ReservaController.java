@@ -1,21 +1,11 @@
 package com.example.demo.controller;
 
-import org.springframework.ui.Model;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.modelo.Habitacion;
-import com.example.demo.modelo.Reserva;
 import com.example.demo.repositorio.ReservaRepository;
 
 
@@ -49,6 +39,7 @@ public class ReservaController {
         return "servicios";
     }
 
+<<<<<<< HEAD
     @GetMapping("/consumos")
     public String obtenerConsumos(Model model) {
         model.addAttribute("clientes", reservasRepository.getUniqueConsumos());
@@ -73,6 +64,19 @@ public class ReservaController {
         return "habitaciones";
     }
 
+=======
+    @GetMapping("/salidas")
+    public String obtenerSalida(Model model) {
+        model.addAttribute("salidas", reservasRepository.getSalidas());
+        return "salidas";
+    }
+
+    @GetMapping("/entradas")
+    public String obtenerEntrada(Model model) {
+        model.addAttribute("entradas", reservasRepository.getEntradas());
+        return "entradas";
+    }
+>>>>>>> f69e3cea4a73a230b7124e586c58fda8c8f08552
 
     @GetMapping("/reservas/{id}/delete")
     public String reservasEliminar(@PathVariable("id") String id) {
