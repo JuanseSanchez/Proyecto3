@@ -49,6 +49,30 @@ public class ReservaController {
         return "servicios";
     }
 
+    @GetMapping("/consumos")
+    public String obtenerConsumos(Model model) {
+        model.addAttribute("clientes", reservasRepository.getUniqueConsumos());
+        return "consumos";
+    }
+
+    @GetMapping("/clientes/requerimiento7")
+    public String obtenerClientesRequerimiento7(Model model) {
+        model.addAttribute("clientes", reservasRepository.getReq7());
+        return "clientes";
+    } 
+
+    @GetMapping("/habitaciones/requerimiento2")
+    public String obtenerPorcentajeOcupacion(Model model) {
+        model.addAttribute("habitaciones", reservasRepository.getReq2());
+        return "habitaciones";
+    }
+
+    @GetMapping("/habitaciones/requerimiento2")
+    public String obtenerConsumoTotal(Model model) {
+        model.addAttribute("habitaciones", reservasRepository.getReq1());
+        return "habitaciones";
+    }
+
 
     @GetMapping("/reservas/{id}/delete")
     public String reservasEliminar(@PathVariable("id") String id) {
