@@ -2,11 +2,9 @@ package com.example.demo.modelo;
 
 import java.util.List;
 
-import org.bson.types.ObjectId;
-
 public class Cliente {
 
-    private ObjectId id;
+    private int id;
     private String nombre;
     private String entrada;
     private String salida;
@@ -24,11 +22,11 @@ public class Cliente {
         super();
     }
 
-	public ObjectId getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(ObjectId id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
