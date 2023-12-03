@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salidas</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
+</head>
+<body>
+
+    <!-- Incluye el navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+<div class="container mt-3">
+    <h1>Salidas</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha de Salida</th>
+                <th>Clientes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="salida : ${salidas}">
+                <td th:text="${salida.fecha}"></td>
+                <td>
+                    <li th:each="cliente : ${salida.clientes}">
+                        <span th:text="'Id Cliente: ' + ${cliente.id}"></span><br/>
+                        <span style="margin-left: 20px;" th:text="'Nombre: ' + ${cliente.nombre}"></span><br/>
+                    </li>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+</body>
+</html>

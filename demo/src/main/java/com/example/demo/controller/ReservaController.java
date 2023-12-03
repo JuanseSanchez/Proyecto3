@@ -1,21 +1,11 @@
 package com.example.demo.controller;
 
-import org.springframework.ui.Model;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.modelo.Habitacion;
-import com.example.demo.modelo.Reserva;
 import com.example.demo.repositorio.ReservaRepository;
 
 
@@ -49,6 +39,11 @@ public class ReservaController {
         return "servicios";
     }
 
+    @GetMapping("/salidas")
+    public String obtenerSalida(Model model) {
+        model.addAttribute("salidas", reservasRepository.getSalidas());
+        return "salidas";
+    }
 
     @GetMapping("/reservas/{id}/delete")
     public String reservasEliminar(@PathVariable("id") String id) {
