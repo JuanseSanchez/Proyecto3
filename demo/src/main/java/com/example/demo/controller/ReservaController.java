@@ -29,13 +29,18 @@ public class ReservaController {
     public String obtenerTodasLasReservas(Model model) {
         model.addAttribute("reservas", reservasRepository.findAllReservas());
         return "reservas";
-    } 
+    }
 
     @GetMapping("/habitaciones")
-    public String obtenerTodasLasHabitaciones(Model model) {
-        List<Reserva> reservas = reservasRepository.findAllReservas();
-        
+    public String obtenerHabitaciones(Model model) {
+        model.addAttribute("habitaciones", reservasRepository.getUniqueHabitaciones());
         return "habitaciones";
+    }
+
+    @GetMapping("/tiposhabitaciones")
+    public String obtenerTiposHabitaciones(Model model) {
+        model.addAttribute("tiposhabitaciones", reservasRepository.getUniqueTipos());
+        return "tiposhabitaciones";
     }
 
 

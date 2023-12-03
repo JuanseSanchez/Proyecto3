@@ -4,16 +4,18 @@ import java.util.List;
 
 public class Habitacion {
 
+	private String hotel;
     private int numero;
-    private String hotel;
-    private TipoHabitacion tipoHabitacion;
+	private int diasocupada;
+    private TipoHabitacion tipo;
     private List<Cliente> clientes;
 
-    public Habitacion(int numero, String hotel, TipoHabitacion tipoHabitacion, List<Cliente> clientes) {
+    public Habitacion(String hotel, int numero, int diasocupada, TipoHabitacion tipo, List<Cliente> clientes) {
         super();
+		this.hotel = hotel;
         this.numero = numero;
-        this.hotel = hotel;
-        this.tipoHabitacion = tipoHabitacion;
+		this.diasocupada = diasocupada;
+        this.tipo = tipo;
         this.clientes = clientes;
     }
 
@@ -21,39 +23,45 @@ public class Habitacion {
         super();
     }
 
-    public int getNumero() {
-        return numero;
-    }
+	public String getHotel() {
+		return hotel;
+	}
 
-    public void setNumeron(int numero) {
-        this.numero = numero;
-    }
+	public void setHotel(String hotel) {
+		this.hotel = hotel;
+	}
 
-    public String getHotel() {
-        return hotel;
-    }
+	public int getNumero() {
+		return numero;
+	}
 
-    public void setHotel(String hotel) {
-        this.hotel = hotel;
-    }
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
 
-    public TipoHabitacion getTipoHabitacion() {
-        return tipoHabitacion;
-    }
+	public int getDiasocupada() {
+		return diasocupada;
+	}
 
-    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
-        this.tipoHabitacion = tipoHabitacion;
-    }
+	public void setDiasocupada(int diasocupada) {
+		this.diasocupada = diasocupada;
+	}
 
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
+	public TipoHabitacion getTipo() {
+		return tipo;
+	}
 
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
-    }
+	public void setTipo(TipoHabitacion tipo) {
+		this.tipo = tipo;
+	}
 
-    
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
 
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
 
+	
 }

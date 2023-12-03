@@ -34,19 +34,19 @@ public class Reserva {
         this.id = id;
     }
 
-    public String getinicio() {
+    public String getInicio() {
         return inicio;
     }
 
-    public void setinicio(String inicio) {
+    public void setInicio(String inicio) {
         this.inicio = inicio;
     }
 
-    public String getfin() {
+    public String getFin() {
         return fin;
     }
 
-    public void setfin(String fin) {
+    public void setFin(String fin) {
         this.fin = fin;
     }
 
