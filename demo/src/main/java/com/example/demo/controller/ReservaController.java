@@ -39,7 +39,6 @@ public class ReservaController {
         return "servicios";
     }
 
-<<<<<<< HEAD
     @GetMapping("/consumos")
     public String obtenerConsumos(Model model) {
         model.addAttribute("clientes", reservasRepository.getUniqueConsumos());
@@ -64,7 +63,6 @@ public class ReservaController {
         return "habitaciones";
     }
 
-=======
     @GetMapping("/salidas")
     public String obtenerSalida(Model model) {
         model.addAttribute("salidas", reservasRepository.getSalidas());
@@ -76,7 +74,6 @@ public class ReservaController {
         model.addAttribute("entradas", reservasRepository.getEntradas());
         return "entradas";
     }
->>>>>>> f69e3cea4a73a230b7124e586c58fda8c8f08552
 
     @GetMapping("/reservas/{id}/delete")
     public String reservasEliminar(@PathVariable("id") String id) {
