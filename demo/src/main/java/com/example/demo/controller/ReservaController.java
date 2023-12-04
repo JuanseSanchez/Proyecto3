@@ -59,24 +59,17 @@ public class ReservaController {
 
     @GetMapping("/RFC3_menu")
     public String RFC3(Model model,
-                    @RequestParam(name = "id") int id,
-                    @RequestParam(name = "fechaI") String fechaI,
-                    @RequestParam(name = "fechaF") String fechaF) {
+                   @RequestParam(name = "id", required = false, defaultValue = "0") int id,
+                   @RequestParam(name = "fechaI", required = false, defaultValue = "") String fechaI,
+                   @RequestParam(name = "fechaF", required = false, defaultValue = "") String fechaF) {
+    // Your existing logic to populate model attributes
 
-        // Convert String dates to Date objects in ISO 8601 format (YYYY-MM-DD)
-        SimpleDateFormat isoDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date parsedFechaI = null;
-        Date parsedFechaF = null;
-        try {
-            parsedFechaI = (Date) isoDateFormat.parse(fechaI);
-            parsedFechaF = (Date) isoDateFormat.parse(fechaF);
-        } catch (ParseException e) {
-            // Handle parsing exception if needed
-            e.printStackTrace();
-        }
+    model.addAttribute("id", id);
+    model.addAttribute("fechaI", fechaI);
+    model.addAttribute("fechaF", fechaF);
 
-        model.addAttribute("RFC3_menu", reservasRepository.getReq3(id, parsedFechaI, parsedFechaF));
-        return "RFC3_menu";
+    model.addAttribute("RFC3_menu", reservasRepository.getReq3(id, fechaI, fechaF));
+    return "RFC3_menu";
 }
 
 
