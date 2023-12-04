@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.modelo.Consumo;
 import com.example.demo.modelo.Habitacion;
@@ -57,13 +58,23 @@ public class ReservaController {
     public String obtenerClientesRequerimiento7(Model model) {
         model.addAttribute("RFC7", reservasRepository.getReq7());
         return "RFC7";
-    } 
+    }
 
-    @GetMapping("/RFC3")
-    public String RFC3(Model model, int id, Date fechaInicio, Date fechaFin) {
-        model.addAttribute("RFC3", reservasRepository.getReq3(id, fechaInicio, fechaFin));
-        return "RFC3";
-    } 
+    @GetMapping("/RFC3_menu")
+    public String RFC3(Model model,
+                   @RequestParam(name = "id", required = false, defaultValue = "0") int id,
+                   @RequestParam(name = "fechaI", required = false, defaultValue = "") String fechaI,
+                   @RequestParam(name = "fechaF", required = false, defaultValue = "") String fechaF) {
+    // Your existing logic to populate model attributes
+
+    model.addAttribute("id", id);
+    model.addAttribute("fechaI", fechaI);
+    model.addAttribute("fechaF", fechaF);
+
+    model.addAttribute("RFC3_menu", reservasRepository.getReq3(id, fechaI, fechaF));
+    return "RFC3_menu";
+}
+
 
     @GetMapping("/RFC2")
     public String obtenerPorcentajeOcupacion(Model model) {
@@ -129,7 +140,7 @@ public class ReservaController {
         reservasRepository.deleteById(id);
         return "redirect:/reservas";
     }
-/* 
+/*
     @GetMapping("/reservas/{id}/edit")
     public String reservasEditar(@PathVariable("id") String id, Model model) {
         reservasRepository.deleteById(id);

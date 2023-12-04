@@ -1,40 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFC3 menu</title>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RFC3_menu</title>
+        <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
+    </head>
+    <body>
 
-<h2>RFC3 menu</h2>
+        <!-- Incluye el navbar -->
+        <div th:replace="navbar :: navbar"></div>
 
-<form id="myForm">
-    <label for="field1">Id huesped:</label>
-    <input type="number" id="field1" name="field1" required><br>
+    <div class="container mt-3">
+        <div class="d-flex justify-content-start">
+            <h1 style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">RFC3</h1>
+        </div>
 
-    <label for="field2">Fecha inicio:</label>
-    <input type="date" id="field2" name="field2" required><br>
+        <!-- Formulario de creación -->
+        <form th:action="@{/RFC3_menu}" method="get" style="margin-top: 35px;">
+            <!-- Your form fields -->
+            <label for="id">Id:</label>
+            <input type="number" id="id" name="id" th:value="${id}" required />
+        
+            <label for="fecha inicio">Fecha Inicio:</label>
+            <input type="date" id="fechaI" name="fechaI" th:value="${fechaI}" required />
+        
+            <label for="fecha fin">Fecha Fin:</label>
+            <input type="date" id="fechaF" name="fechaF" th:value="${fechaF}" required />
+        
+            <button type="submit" class="btn btn-success">Consultar</button>
+        </form>
+        
+        <div th:if="${RFC3_menu != null}">
+            <h2>Result:</h2>
+            <!-- Access and display the properties of the result -->
+            <div th:each="item : ${RFC3_menu}">
+                <p th:text="${item.clienteNombre}"></p>
+                <p th:text="${item.clienteId}"></p>
+                <p th:text="${item.totalConsumos}"></p>
+                
+            </div>
+            <!-- Add more properties as needed -->
+        </div>
 
-    <label for="field3">Fecha fin:</label>
-    <input type="date" id="field3" name="field3" required><br>
+    </div>
 
-    <button type="button" onclick="submitForm()">Submit</button>
-</form>
-
-<script>
-    function submitForm() {
-        // Get values from the form fields
-        var field1Value = document.getElementById('field1').value;
-        var field2Value = document.getElementById('field2').value;
-        var field3Value = document.getElementById('field3').value;
-
-        // You can perform additional validation or processing here
-
-        // Display the values (for demonstration purposes)
-        alert("Field 1: " + field1Value + "\nField 2: " + field2Value + "\nField 3: " + field3Value);
-    }
-</script>
-
-</body>
-</html>
+    <script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    </body>
+    </html>
