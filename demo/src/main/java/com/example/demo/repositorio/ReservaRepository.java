@@ -96,12 +96,9 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
 
     @Aggregation(pipeline = {
         "{ $unwind: \"$habitacion.clientes\" }",
-        "{ $match: { \"habitacion.clientes.id\": ?0 } }",
         "{ $unwind: \"$habitacion.clientes.consumos\" }",
         "{ $match: { \"habitacion.clientes.consumos.fecha\": { $gte: ?1, $lt: ?2 } } }",
         "{ $group: { _id: \"$habitacion.clientes.id\", nombreC: { $first: \"$habitacion.clientes.nombre\" }, totalConsumos: { $sum: \"$habitacion.clientes.consumos.precio\" } } }",
-        "{ $project: { _id: 0, clienteId: \"$_id\", clienteNombre: \"$nombreC\", totalConsumos: 1} }"
-    })
+        "{ $project: { _id: 0, clienteId: \"$_id\", clienteNombre: \"$nombreC\", totalConsumos: 1} }", "{$match: {clienteId:?0}}"})
     List<RFC3> getReq3(int id, String fechaI, String fechaF);
-    
 }
