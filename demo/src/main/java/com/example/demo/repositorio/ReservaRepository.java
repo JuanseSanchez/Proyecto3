@@ -103,4 +103,5 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
         "{ $project: { _id: 0, clienteId: \"$_id\", clienteNombre: \"$nombreC\", totalConsumos: 1} }"
     })
     List<RFC3> getReq3(int id, String fechaI, String fechaF);
+    
 }
