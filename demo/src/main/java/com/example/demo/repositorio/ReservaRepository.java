@@ -9,6 +9,7 @@ import com.example.demo.modelo.Cliente;
 import com.example.demo.modelo.Habitacion;
 import com.example.demo.modelo.RFC1;
 import com.example.demo.modelo.RFC2;
+import com.example.demo.modelo.RFC3;
 import com.example.demo.modelo.RFC7;
 import com.example.demo.modelo.Reserva;
 import com.example.demo.modelo.EntradaSalida;
@@ -73,15 +74,6 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
         "{ $project: { _id: 1, nombre: \"$_nombre\" } }"})
     List<RFC7> getReq7();
 
-    @Aggregation(pipeline = {
-        "{ $match: { \"habitacion.clientes.id\": ?0 } }",
-        "{ $unwind: \"$habitacion.clientes.consumos\" }",
-        "{ $match: { \"habitacion.clientes.consumos.fecha\": { $gte: ?1, $lt: ?2 } } }",
-        "{$group: {_id: \"$habitacion.clientes.id\",nombreC: { $first: \"$habitacion.clientes.nombre\" },totalConsumos: { $sum: \"$habitacion.clientes.consumos.precio\" }}}",
-        "{ $project: { _id: 0, clienteId: \"$_id\", clienteNombre: \"$nombreC\", totalConsumos: 1} }"
-    })
-    List<Habitacion> getReq3(int clienteId, Date startDate, Date endDate);
-
     @Aggregation(pipeline = {"{ $match: { $expr: { $and: [ { $gte: [ { $toDate: \"$inicio\" }, { $subtract: [new Date(), {$multiply:[365, 24, 60, 60, 1000]}] } ] }, { $lte: [ { $toDate: \"$fin\" }, new Date() ] } ] } } }",
         "{ $group: { _id: { hotel: \"$habitacion.hotel\", numero: \"$habitacion.numero\" }, totalDays: { $sum: { $dateDiff: { startDate: { $toDate: \"$inicio\" }, endDate: { $toDate: \"$fin\" }, unit: \"day\" } } } } }",
         "{ $project: { _id: 0, hotel: \"$_id.hotel\", numero: \"$_id.numero\", porcentajeOcupacion: { $round: [ { $multiply: [ { $divide: [\"$totalDays\", 365] }, 100 ] }, 2 ] } } }"})
@@ -101,4 +93,14 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
         "{ $project: { fecha: \"$_id\", clientes: 1, _id: 0 } }",
         "{ $sort: { \"fecha\": 1 } }"})
     List<EntradaSalida> getEntradas();
+
+    @Aggregation(pipeline = {
+        "{ $unwind: \"$habitacion.clientes\" }",
+        "{ $match: { \"habitacion.clientes.id\": ?0 } }",
+        "{ $unwind: \"$habitacion.clientes.consumos\" }",
+        "{ $match: { \"habitacion.clientes.consumos.fecha\": { $gte: ?1, $lt: ?2 } } }",
+        "{ $group: { _id: \"$habitacion.clientes.id\", nombreC: { $first: \"$habitacion.clientes.nombre\" }, totalConsumos: { $sum: \"$habitacion.clientes.consumos.precio\" } } }",
+        "{ $project: { _id: 0, clienteId: \"$_id\", clienteNombre: \"$nombreC\", totalConsumos: 1} }"
+    })
+    List<RFC3> getReq3(int id, String fechaI, String fechaF);
 }
