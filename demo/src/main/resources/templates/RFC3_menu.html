@@ -21,26 +21,23 @@
             <!-- Your form fields -->
             <label for="id">Id:</label>
             <input type="number" id="id" name="id" th:value="${id}" required />
-        
+
             <label for="fecha inicio">Fecha Inicio:</label>
             <input type="date" id="fechaI" name="fechaI" th:value="${fechaI}" required />
-        
+
             <label for="fecha fin">Fecha Fin:</label>
             <input type="date" id="fechaF" name="fechaF" th:value="${fechaF}" required />
-        
+
             <button type="submit" class="btn btn-success">Consultar</button>
         </form>
-        
+
         <div th:if="${RFC3_menu != null}">
             <h2>Result:</h2>
-            <!-- Access and display the properties of the result -->
             <div th:each="item : ${RFC3_menu}">
-                <p th:text="${item.clienteNombre}"></p>
-                <p th:text="${item.clienteId}"></p>
-                <p th:text="${item.totalConsumos}"></p>
-                
+                <p><strong>Nombre Cliente:</strong> <span th:text="${item.clienteNombre}"></span></p>
+                <p><strong>Id Cliente:</strong> <span th:text="${item.clienteId}"></span></p>
+                <p><strong>Costo Total de Consumos:</strong> <span th:text="${item.totalConsumos}"></span></p>
             </div>
-            <!-- Add more properties as needed -->
         </div>
 
     </div>
