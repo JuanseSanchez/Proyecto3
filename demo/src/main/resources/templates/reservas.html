@@ -11,28 +11,38 @@
     <!-- Incluye el navbar -->
     <div th:replace="navbar :: navbar"></div>
 
-<div class="container mt-3">
-    <h1>Reservas</h1>
+    <div class="container mt-3">
+        <h1>Reservas</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id Reserva</th>
-                <th>Fecha de Inicio</th>
-                <th>Fecha de Finalización</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="reserva : ${reservas}">
-                <td th:text="${reserva.id}"></td>
-                <td th:text="${reserva.inicio}"></td>
-                <td th:text="${reserva.fin}"></td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id Reserva</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Finalización</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reserva : ${reservas}">
+                    <td th:text="${reserva.id}"></td>
+                    <td th:text="${reserva.inicio}"></td>
+                    <td th:text="${reserva.fin}"></td>
+                    <td>
+                        <form th:action="@{/deleteReserva}" method="post" style="display:inline;">
+                            <input type="hidden" name="id" th:value="${reserva.id}" />
+                            <button type="submit" class="btn btn-primary" style="background-color: red; border-color: red;">Eliminar Reserva</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-</div>
+        <a th:href="@{/crearReserva}" class="btn btn-primary" style="margin-bottom: 38px;">Crear Nueva Reserva</a>
 
-<script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+
+    </div>
+
+    <script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
 </body>
 </html>

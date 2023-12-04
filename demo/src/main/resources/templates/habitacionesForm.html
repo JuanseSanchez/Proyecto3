@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Habitacion</title>
+</head>
+<body>
+
+    <!-- Incluye el navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+<div class="container mt-3">
+    <h1>Nueva Habitacion</h1>
+
+    <!-- Formulario de creación -->
+    <form th:action="@{/crearHabitacionNueva}" th:object="${habitacionNueva}" method="post">
+
+        <!-- Campos para la información de la bebida -->
+        <label for="Hotel">Hotel:</label>
+        <input type="text" id="Hotel" name="Hotel" th:field="*{Hotel}" required />
+    
+        <label for="numero">Numero habitacion:</label>
+        <input type="text" id="numero" name="numero" th:field="*{numero}" required />
+
+        <button type="submit" class="btn btn-success">Crear Habitacion</button>
+    </form>
+    
+
+</div>
+
+</body>
+</html>

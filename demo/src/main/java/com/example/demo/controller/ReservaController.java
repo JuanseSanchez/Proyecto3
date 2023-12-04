@@ -6,8 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.modelo.Consumo;
+import com.example.demo.modelo.Habitacion;
+import com.example.demo.modelo.Reserva;
 import com.example.demo.repositorio.ReservaRepository;
 
 
@@ -81,6 +87,40 @@ public class ReservaController {
     public String obtenerEntrada(Model model) {
         model.addAttribute("entradas", reservasRepository.getEntradas());
         return "entradas";
+    }
+
+    @GetMapping("/crearConsumo")
+    public String crearConsumo(Model model) {
+        model.addAttribute("consumoNuevo",new Consumo());
+        return "consumoForm";
+    }
+
+    @PostMapping("/crearBebidaNueva")
+    public String crearConsumoNuevo(@ModelAttribute("consumoNuevo") Consumo consumo) {
+        Consumo nuevo = new Consumo(
+            consumo.getNombre(), consumo.getFecha(), consumo.getPrecio(), consumo.getServicio());
+        /*reservasRepository.save(nuevo);*/
+        return "redirect:/consumos";
+    }
+
+    @GetMapping("/crearReserva")
+    public String crearReserva(Model model) {
+        model.addAttribute("reservaNueva", new Reserva());
+        return "reservaForm";
+    }
+
+    @PostMapping("/crearReservaNueva")
+    public String crearReservaNueva(@ModelAttribute("reservaNueva") Reserva reserva) {
+        Reserva nueva = new Reserva(
+            reserva.getInicio(), reserva.getFin(), new Habitacion());
+        reservasRepository.save(nueva);
+        return "redirect:/reservas";
+    }
+
+    @PostMapping("/deleteReserva")
+    public String eliminarReserva(@RequestParam(name = "id", required = false) String id){
+        reservasRepository.deleteById(id);
+        return "redirect:/reservas";
     }
 
     @GetMapping("/reservas/{id}/delete")

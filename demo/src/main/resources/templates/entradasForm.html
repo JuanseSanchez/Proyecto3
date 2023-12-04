@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Entrada</title>
+</head>
+<body>
+
+    <!-- Incluye el navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+<div class="container mt-3">
+    <h1>Nueva Entrada</h1>
+
+    <!-- Formulario de creación -->
+    <form th:action="@{/crearEntradaNueva}" th:object="${entradaNueva}" method="post">
+
+        <!-- Campos para la información de la bebida -->
+        <label for="entrada">Fecha de entrada:</label>
+        <input type="entrada" id="entrada" name="entrada" th:field="*{entrada}" required />
+    
+        <label for="fin">Cliente</label>
+        <input type="cliente" id="cliente" name="cliente" th:field="*{cliente}" required />
+
+        <button type="submit" class="btn btn-success">Crear Entrada</button>
+    </form>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Salida</title>
+</head>
+<body>
+
+    <!-- Incluye el navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+<div class="container mt-3">
+    <h1>Nueva Salida</h1>
+
+    <!-- Formulario de creación -->
+    <form th:action="@{/crearSalidaNueva}" th:object="${salidaNueva}" method="post">
+
+        <!-- Campos para la información de la bebida -->
+        <label for="fecha">Fecha de salida:</label>
+        <input type="text" id="fecha" name="fecha" th:field="*{fecha}" required />
+    
+        <label for="id">Cliente:</label>
+        <input type="text" id="id" name="id" th:field="*{id}" required />
+
+        <button type="submit" class="btn btn-success">Crear Salida</button>
+    </form>
+    
+
+</div>
+
+</body>
+</html>

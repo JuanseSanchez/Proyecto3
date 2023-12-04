@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Reserva</title>
+</head>
+<body>
+
+    <!-- Incluye el navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+<div class="container mt-3">
+    <h1>Nueva Reserva</h1>
+
+    <!-- Formulario de creación -->
+    <form th:action="@{/crearReservaNueva}" th:object="${reservaNueva}" method="post">
+
+        <!-- Campos para la información de la bebida -->
+        <label for="inicio">Fecha de inicio:</label>
+        <input type="text" id="inicio" name="inicio" th:field="*{inicio}" required />
+    
+        <label for="fin">Fecha de Fin:</label>
+        <input type="text" id="fin" name="fin" th:field="*{fin}" required />
+
+        <button type="submit" class="btn btn-success">Crear Reserva</button>
+    </form>
+    
+
+</div>
+
+</body>
+</html>

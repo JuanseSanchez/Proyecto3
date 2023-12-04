@@ -21,6 +21,7 @@
                 <th>Número</th>
                 <th>Tipo</th>
                 <th>Precio</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -29,9 +30,15 @@
                 <td th:text="${habitacion.numero}"></td>
                 <td th:text="${habitacion.tipo.nombre}"></td>
                 <td th:text="${habitacion.tipo.precio}"></td>
+                <td>
+                        <button type="submit" class="btn btn-primary" style="background-color: red; border-color: red;">Eliminar Habitacion</button>
+                    
+                </td>
             </tr>
         </tbody>
     </table>
+
+    <a th:href="@{/crearhabitacion}" class="btn btn-primary" style="margin-bottom: 38px;">Crear Nueva Habitacion</a>
 
 </div>
 

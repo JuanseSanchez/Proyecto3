@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Consumo</title>
+</head>
+<body>
+
+    <!-- Incluye el navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+<div class="container mt-3">
+    <h1>Nuevo Consumo</h1>
+
+    <!-- Formulario de creación -->
+    <form th:action="@{/crearConsumoNuevo}" th:object="${consumoNuevo}" method="post">
+
+        <!-- Campos para la información de la bebida -->
+        <label for="id">ID del cliente:</label>
+        <input type="text" id="id" name="id" th:field="*{id}" required />
+
+        <label for="fecha">Fecha:</label>
+        <input type="text" id="fecha" name="fecha" th:field="*{fecha}" required />
+    
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" th:field="*{nombre}" required />
+
+        <label for="precio">Precio:</label>
+        <input type="text" id="precio" name="precio" th:field="*{precio}" required />
+    
+        <button type="submit" class="btn btn-success">Crear Consumo</button>
+    </form>
+    
+
+</div>
+
+</body>
+</html>

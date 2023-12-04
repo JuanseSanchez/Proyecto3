@@ -19,15 +19,24 @@
             <tr>
                 <th>Servicio</th>
                 <th>Precio</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="servicio : ${servicios}">
                 <td th:text="${servicio.nombre}"></td>
                 <td th:text="${servicio.precio}"></td>
+                <td>
+                    <form th:action="@{/deleteServicio}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${servicio.nombre}" />
+                        <button type="submit" class="btn btn-primary" style="background-color: red; border-color: red;">Eliminar Servicio</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
+
+    <a th:href="@{/crearServicio}" class="btn btn-primary" style="margin-bottom: 38px;">Crear Nuevo Servicio</a>
 
 </div>
 

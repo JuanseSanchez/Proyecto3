@@ -19,6 +19,7 @@
             <tr>
                 <th>Fecha de Salida</th>
                 <th>Clientes</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -32,9 +33,15 @@
                         <span style="margin-left: 5px;" th:text="${cliente.nombre}"></span><br/>
                     </li>
                 </td>
+                <td>
+                    <button type="submit" class="btn btn-primary" style="background-color: red; border-color: red;">Eliminar Salida</button>
+                </td>
             </tr>
         </tbody>
     </table>
+
+    <a th:href="@{/crearSalida}" class="btn btn-primary" style="margin-bottom: 38px;">Crear Nueva Salida</a>
+
 
 </div>
 
