@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,13 +57,28 @@ public class ReservaController {
         return "RFC7";
     }
 
-    @GetMapping("/RFC3")
-    public String RFC3(Model model, @RequestParam(name = "id") int id,
-                                    @RequestParam(name = "fechaI") Date fechaI,
-                                    @RequestParam(name = "fechaF") Date fechaF) {
-        model.addAttribute("RFC3", reservasRepository.getReq3(id, fechaI, fechaF));
-        return "RFC3";
-    }
+    @GetMapping("/RFC3_menu")
+    public String RFC3(Model model,
+                    @RequestParam(name = "id") int id,
+                    @RequestParam(name = "fechaI") String fechaI,
+                    @RequestParam(name = "fechaF") String fechaF) {
+
+        // Convert String dates to Date objects in ISO 8601 format (YYYY-MM-DD)
+        SimpleDateFormat isoDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedFechaI = null;
+        Date parsedFechaF = null;
+        try {
+            parsedFechaI = (Date) isoDateFormat.parse(fechaI);
+            parsedFechaF = (Date) isoDateFormat.parse(fechaF);
+        } catch (ParseException e) {
+            // Handle parsing exception if needed
+            e.printStackTrace();
+        }
+
+        model.addAttribute("RFC3_menu", reservasRepository.getReq3(id, parsedFechaI, parsedFechaF));
+        return "RFC3_menu";
+}
+
 
     @GetMapping("/RFC2")
     public String obtenerPorcentajeOcupacion(Model model) {
