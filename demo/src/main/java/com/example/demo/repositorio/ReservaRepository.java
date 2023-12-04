@@ -32,9 +32,11 @@ public interface ReservaRepository extends MongoRepository<Reserva, ObjectId> {
     Reserva updateReserva(String id, Reserva reserva);
 
     @Aggregation(pipeline = {
+        "{ $match: { \"habitacion.tipo.nombre\": { $ne: null } } }",
         "{ $group: { _id: \"$habitacion.tipo.nombre\", tipo: { $first: \"$habitacion.tipo\" } } }",
         "{ $replaceWith: \"$tipo\" }"})
     List<TipoHabitacion> getUniqueTipos();
+
 
     @Aggregation(pipeline = {
         "{ $group: { _id: \"$habitacion.numero\", habitacion: { $first: \"$habitacion\" } } }",
